@@ -903,14 +903,12 @@ void kill_screen(const char* lcd_msg) {
           lcd_implementation_drawedit(PSTR(MSG_ZPROBE_ZOFFSET), ftostr43sign(zprobe_zoffset));
       }
 
-    #else // !BABYSTEP_ZPROBE_OFFSET
+    #endif // HAS_BED_PROBE
 
-      void _lcd_babystep_z() { _lcd_babystep(Z_AXIS, PSTR(MSG_BABYSTEPPING_Z)); }
-      void lcd_babystep_z() { lcd_goto_screen(_lcd_babystep_z); babysteps_done = 0; defer_return_to_status = true; }
+    void _lcd_babystep_z() { _lcd_babystep(Z_AXIS, PSTR(MSG_BABYSTEPPING_Z)); }
+    void lcd_babystep_z() { lcd_goto_screen(_lcd_babystep_z); babysteps_done = 0; defer_return_to_status = true; }
 
-    #endif // !BABYSTEP_ZPROBE_OFFSET
-
-  #endif // BABYSTEPPING
+  #endif //BABYSTEPPING
 
   #if ENABLED(AUTO_BED_LEVELING_UBL)
 
